@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+        }
+
+        form {
+            background-color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            /* margin: auto; */
+            margin: 20px 30px 30px 500px;
+            font-size: 30px;
+            height: 440px;
+            border: none;
+            border-radius: 20px;
+            -moz-box-shadow: 0 0 5px 5px rgb(214, 206, 206);
+            -webkit-box-shadow: 0 0 5px 5px rgb(199, 191, 191);
+            box-shadow: 0 0 5px 5px rgb(212, 203, 203);
+        }
+
+        #navBar {
+            justify-content: space-evenly;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            color: rgb(58, 202, 202);
+            font-size: 40px;
+            -moz-box-shadow: 0 0 5px 5px rgb(214, 206, 206);
+            -webkit-box-shadow: 0 0 5px 5px rgb(199, 191, 191);
+            box-shadow: 0 0 5px 5px rgb(212, 203, 203);
+        }
+
+        a[href] {
+            color: rgb(53, 138, 138);
+            text-decoration: none;
+        }
+
+        #navBar>div>a:hover {
+            cursor: pointer;
+            color: rgb(169, 243, 218);
+        }
+
+        input {
+            width: 35%;
+            font-size: 24px;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+        select {
+            font-size: 24px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navBar">
+        <div><a href="./index.html">Home</a></div>
+        <div><a href="./contact.html">Contact List</a></div>
+        <div><a href="./favourites.html">Favourites</a></div>
+
+
+    </div>
+
+    <form>
+        <h3 style="text-decoration: underline;">Enter Your Contact Details</h3>
+        <input type="text" id="name" placeholder="Enter Contact Name">
+        <input type="number" id="number" placeholder="Enter Mobile Number">
+        <select name="Select Type" id="type">
+            <option value="Select type">Select type</option>
+            <option value="Friends">Friends</option>
+            <option value="Family">Family</option>
+            <option value="Others">Others</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+<script>
+    var contactList;
+    if (JSON.parse(localStorage.getItem('contactList')) == null) {
+        contactList = [];
+    } else {
+        contactList = JSON.parse(localStorage.getItem('contactList'));
+    }
+
+    document.querySelector('form').addEventListener('submit', function () {
+
+        contactObj = {
+            name: document.querySelector('#name').value,
+            number: document.querySelector('#number').value,
+            type: document.querySelector('#type').value,
+        }
+
+        contactList.push(contactObj);
+        localStorage.setItem('contactList', JSON.stringify(contactList));
+        alert("Added contact to your contact list");
+
+    });
+</script>
+
+</html>
